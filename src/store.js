@@ -1,4 +1,16 @@
-import {createStore} from 'redux';
+import {createStore, applyMiddleware, combineReducers} from 'redux';
+import thunk from 'redux-thunk';
 import {gameReducer} from './pocketpotReducer';
 
-export default createStore(gameReducer);
+
+const store = createStore(
+    combineReducers({
+        game: gameReducer
+    }),
+    applyMiddleware(thunk)
+);
+
+
+
+
+export default store;
