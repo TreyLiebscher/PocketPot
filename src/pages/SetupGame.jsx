@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addPlayer, chipValue, addChips } from '../actions/gameActions';
+import { addPlayer, chipValue, addChips, distChips } from '../actions/gameActions';
 import store from '../store';
 
 
@@ -39,56 +39,43 @@ store.dispatch(addPlayer({
 }))
 
 store.dispatch(chipValue({
-    white: {value: 5, quantity: 20}, 
-    red: {value: 10, quantity: 20}, 
+    white: {value: 5, quantity: 35}, 
+    red: {value: 10, quantity: 25}, 
     green: {value: 15, quantity: 20}, 
-    blue: {value: 20, quantity: 20}, 
-    black: {value: 25, quantity: 20}
+    blue: {value: 20, quantity: 10}, 
+    black: {value: 25, quantity: 5}
 }))
 
-store.dispatch(addChips({
-    name: 'Jack',
-    chips: {
-        white: 20,
-        green: 15,
-        red: 10,
-        blue: 5,
-        black: 3
-    }
-}));
-
-store.dispatch(addChips({
-    name: 'John',
-    chips: {
-        white: 20,
-        green: 15,
-        red: 10,
-        blue: 5,
-        black: 3
-    }
-}));
-
-store.dispatch(addChips({
-    name: 'Jack',
-    chips: {
-        white: 2,
-        green: 1,
-        red: 1,
-        blue: 5,
-        black: 3
-    }
-}));
-
-
-console.log(store.getState());
+console.log('kiwi', store.getState());
 
 class SetupGame extends Component {
+    
     componentDidMount(){
-        
+
     }
+
     render(){
+        const players = this.props.game.players.map((player) => {
+            return  <div>
+                        <div>{player.name}</div>
+                        <div>White: {player.chips.white}</div>
+                        <div>Green: {player.chips.green}</div>
+                        <div>Red: {player.chips.red}</div>
+                        <div>Blue: {player.chips.blue}</div>
+                        <div>Black: {player.chips.black}</div>
+                    </div>
+
+        });
+
+        const newChips = {name: 'Jack', chips: {white: 15}};
+        
         return (
-            <div className="setup-game">New game setup...</div>
+            <div className="container">
+                <div className="setup-game">New game setup...</div>
+                <div>{players}</div>
+                <button className="test-button" onClick={e => this.props.dispatch(addChips(newChips))}>Give Chips</button>
+                <button className="test-button" onClick={e => this.props.dispatch(distChips())}>Dist chips</button>
+            </div>
         )
     }
 }
