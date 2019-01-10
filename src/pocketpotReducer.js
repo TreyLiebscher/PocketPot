@@ -2,7 +2,8 @@ import {
     ADD_PLAYER,
     CHIP_VALUE,
     ADD_CHIPS,
-    DIST_CHIPS
+    DIST_CHIPS,
+    HAND_OVER
 } from '../src/actions/gameActions';
 
 
@@ -32,6 +33,10 @@ const gameState = {
             quantity: 0
         }
     },
+    dealer: null,
+    counter: 0,
+    smallBlind: null,
+    bigBlind: null,
     pot: null,
 }
 
@@ -125,9 +130,38 @@ export function gameReducer(state = gameState, action) {
                 }
             }
         })
+        const countCheck = () => {return state.counter >= state.players.length ? state.counter = 0 : state.counter};
+        let smallBlindPos = state.counter + 1;
+        let bigBlindPos = state.counter + 2;
+        
+
         const changedState = {
-            players: updatedPlayers
+            counter: countCheck(),
+            players: updatedPlayers,
+            dealer: updatedPlayers[state.counter],
+            smallBlind: updatedPlayers[smallBlindPos],
+            bigBlind: updatedPlayers[bigBlindPos]
         }
+        const newState = {...state, ...changedState};
+        return newState;
+    }
+
+    else if(action.type = HAND_OVER){
+        const updatedPlayers = state.players.slice();
+        const countCheck = () => {return state.counter >= state.players.length ? 0 : state.counter + 1};
+        let smallBlindPos = state.counter + 1;
+        let bigBlindPos = state.counter + 2;
+        if(bigBlindPos >= updatedPlayers.length){
+            bigBlindPos = 0;
+        }
+
+        const changedState = {
+            counter: countCheck(),
+            players: updatedPlayers,
+            dealer: updatedPlayers[state.counter],
+            smallBlind: updatedPlayers[smallBlindPos++],
+            bigBlind: updatedPlayers[bigBlindPos++]
+        };
         const newState = {...state, ...changedState};
         return newState;
     }
