@@ -10,14 +10,8 @@ export const chipValue = (values) => ({
     values
 });
 
-
-
-
-
-
-
 export const ADD_CHIPS = 'ADD_CHIPS';
 export const addChips = (chips) => ({
     type: ADD_CHIPS,
     chips
-})
+});

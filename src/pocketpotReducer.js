@@ -35,7 +35,7 @@ const gameState = {
 }
 
 export function gameReducer(state = gameState, action) {
-
+    // Add Players
     if (action.type === ADD_PLAYER) {
         const changedState = {
             loading: false,
@@ -46,7 +46,9 @@ export function gameReducer(state = gameState, action) {
             ...changedState
         };
         return newState;
-    } else if (action.type === CHIP_VALUE) {
+    }
+    // Determine value/quantity of chips
+    else if (action.type === CHIP_VALUE) {
         const changedState = {
             loading: false,
             error: null,
@@ -77,13 +79,15 @@ export function gameReducer(state = gameState, action) {
             ...changedState
         };
         return newState;
-    } else if (action.type === ADD_CHIPS) {
+    } 
+    // Add chips to players inventory
+    else if (action.type === ADD_CHIPS) {
         return state.players.map((player) => {
             if (player.name !== action.chips.name){
                 return player;
             }
             return {...player, ...action.chips}
-        })
+        });
 
     }
 
