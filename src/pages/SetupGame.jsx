@@ -56,6 +56,30 @@ store.dispatch(addChips({
         black: 3
     }
 }));
+
+store.dispatch(addChips({
+    name: 'John',
+    chips: {
+        white: 20,
+        green: 15,
+        red: 10,
+        blue: 5,
+        black: 3
+    }
+}));
+
+store.dispatch(addChips({
+    name: 'Jack',
+    chips: {
+        white: 2,
+        green: 1,
+        red: 1,
+        blue: 5,
+        black: 3
+    }
+}));
+
+
 console.log(store.getState());
 
 class SetupGame extends Component {
