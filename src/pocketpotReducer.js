@@ -130,10 +130,17 @@ export function gameReducer(state = gameState, action) {
                 }
             }
         })
-        const countCheck = () => {return state.counter >= state.players.length ? state.counter = 0 : state.counter};
-        let smallBlindPos = state.counter + 1;
-        let bigBlindPos = state.counter + 2;
-        
+        const countCheck = () => {
+            if(state.counter >= state.players.length){
+                return 0;
+            } else {
+                return state.counter;
+            }
+        }
+        let localCounter = state.counter;
+        let smallBlindPos = localCounter + 1;
+        let bigBlindPos = localCounter + 2;
+
 
         const changedState = {
             counter: countCheck(),
@@ -148,15 +155,17 @@ export function gameReducer(state = gameState, action) {
 
     else if(action.type = HAND_OVER){
         const updatedPlayers = state.players.slice();
-        const countCheck = () => {return state.counter >= state.players.length ? 0 : state.counter + 1};
+        // const countCheck = () => {return state.counter >= state.players.length ? 0 : state.counter + 1};
+        
         let smallBlindPos = state.counter + 1;
+        let move = state.counter + 1;
         let bigBlindPos = state.counter + 2;
-        if(bigBlindPos >= updatedPlayers.length){
+        if(state.counter >= updatedPlayers.length){
             bigBlindPos = 0;
         }
 
         const changedState = {
-            counter: countCheck(),
+            counter: move,
             players: updatedPlayers,
             dealer: updatedPlayers[state.counter],
             smallBlind: updatedPlayers[smallBlindPos++],
