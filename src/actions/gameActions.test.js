@@ -1,4 +1,4 @@
-import { ADD_PLAYER, addPlayer, CHIP_VALUE, chipValue, ADD_CHIPS, addChips } from './gameActions';
+import { ADD_PLAYER, addPlayer, CHIP_VALUE, chipValue, ADD_CHIPS, addChips, DIST_CHIPS, distChips } from './gameActions';
 
 describe('addPlayer', () => {
     it('Should return the action', () => {
@@ -48,5 +48,13 @@ describe('addChips', () => {
         const action = addChips(chips);
         expect(action.type).toEqual(ADD_CHIPS);
         expect(action.chips).toEqual(chips); 
+    });
+});
+
+describe('distChips', () => {
+    it('Should return the action', () => {
+        const action = distChips();
+        expect(action.type).toEqual(DIST_CHIPS);
+        expect(action.chips).toEqual(); 
     });
 });
