@@ -15,3 +15,9 @@ export const addChips = (chips) => ({
     type: ADD_CHIPS,
     chips
 });
+
+export const DIST_CHIPS = 'DIST_CHIPS';
+export const distChips = (chips) => ({
+    type: DIST_CHIPS,
+    chips
+});

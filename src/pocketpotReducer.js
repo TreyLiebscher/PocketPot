@@ -1,7 +1,8 @@
 import {
     ADD_PLAYER,
     CHIP_VALUE,
-    ADD_CHIPS
+    ADD_CHIPS,
+    DIST_CHIPS
 } from '../src/actions/gameActions';
 
 
@@ -104,6 +105,28 @@ export function gameReducer(state = gameState, action) {
 
         const changedState = {
             players: originalPlayers
+        }
+        const newState = {...state, ...changedState};
+        return newState;
+    }
+
+    else if (action.type === DIST_CHIPS){
+        const originalPlayers = state.players.slice();
+        const playerCount = originalPlayers.length;
+        const updatedPlayers = originalPlayers.map((player) => {
+            return {
+                name: player.name,
+                chips: {
+                    white: Math.floor(state.chipValues.white.quantity / playerCount),
+                    green: Math.floor(state.chipValues.green.quantity / playerCount),
+                    red: Math.floor(state.chipValues.red.quantity / playerCount),
+                    blue: Math.floor(state.chipValues.blue.quantity / playerCount),
+                    black: Math.floor(state.chipValues.black.quantity / playerCount)
+                }
+            }
+        })
+        const changedState = {
+            players: updatedPlayers
         }
         const newState = {...state, ...changedState};
         return newState;
