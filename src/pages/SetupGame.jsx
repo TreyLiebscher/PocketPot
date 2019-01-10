@@ -13,7 +13,8 @@ store.dispatch(addPlayer({
         red: 0,
         blue: 0,
         black: 0
-    }
+    },
+    status: null
 }))
 
 store.dispatch(addPlayer({
@@ -24,7 +25,8 @@ store.dispatch(addPlayer({
         red: 0,
         blue: 0,
         black: 0
-    }
+    },
+    status: null
 }))
 
 store.dispatch(addPlayer({
@@ -35,11 +37,25 @@ store.dispatch(addPlayer({
         red: 0,
         blue: 0,
         black: 0
-    }
+    },
+    status: null
 }))
 
+store.dispatch(addPlayer({
+    name: 'Dutch',
+    chips: {
+        white: 0,
+        green: 0,
+        red: 0,
+        blue: 0,
+        black: 0
+    },
+    status: null
+}))
+
+
 store.dispatch(chipValue({
-    white: {value: 5, quantity: 35}, 
+    white: {value: 5, quantity: 50}, 
     red: {value: 10, quantity: 25}, 
     green: {value: 15, quantity: 20}, 
     blue: {value: 20, quantity: 10}, 
@@ -67,29 +83,29 @@ class SetupGame extends Component {
 
         });
 
-        const status = () => {
-            if(this.props.game.dealer == null){
-                return;
-            } else {
-                const dealer = this.props.game.dealer;
-                const smallBlind = this.props.game.smallBlind;
-                const bigBlind = this.props.game.bigBlind;
-                // return <div>
-                //     <div>Dealer {dealer.name}</div>
-                //     <div>Small Blind {smallBlind.name}</div>
-                //     <div>Big Blind {bigBlind.name}</div>
-                // </div>
-                console.log(dealer.name)
+        // const status = () => {
+        //     if(this.props.game.dealer == null){
+        //         return;
+        //     } else {
+        //         const dealer = this.props.game.dealer.name;
+        //         const smallBlind = this.props.game.smallBlind.name;
+        //         const bigBlind = this.props.game.bigBlind.name;
+        //         return <div>
+        //             <div>Dealer {dealer.name}</div>
+        //             <div>Small Blind {smallBlind.name}</div>
+        //             <div>Big Blind {bigBlind.name}</div>
+        //         </div>
+        //         console.log(dealer.name)
 
-            }
+        //     }
 
 
-        }
+        // }
         
         return (
             <div className="container">
                 <div className="setup-game">New game setup...</div>
-                <div>{status()}</div>
+                {/* <div>{status()}</div> */}
                 <div>{players}</div>
                 <button className="test-button" onClick={e => this.props.dispatch(handOver())}>Shift dealer</button>
                 <button className="test-button" onClick={e => {this.props.dispatch(distChips())}}>Dist chips</button>

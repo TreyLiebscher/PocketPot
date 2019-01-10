@@ -33,20 +33,35 @@ const gameState = {
             quantity: 0
         }
     },
-    dealer: null,
+    dealer: {name: 'Not set'},
     counter: 0,
-    smallBlind: null,
-    bigBlind: null,
+    smallBlind: {name: 'Not set'},
+    bigBlind: {name: 'Not set'},
     pot: null,
 }
 
 export function gameReducer(state = gameState, action) {
     // Add Players
     if (action.type === ADD_PLAYER) {
+        
+        let status;
+
+        if(state.players.length === 0){
+            status = 'dealer';
+        } else if (state.players.length === 1){
+            status = 'smallBlind';
+        } else if (state.players.length === 2){
+            status = 'bigBlind';
+        } else {
+            status = 'player';
+        }
+
+        let newPlayer = action.player;
+        newPlayer.status = status;
         const changedState = {
             loading: false,
             error: null,
-            players: state.players.concat(action.player)
+            players: state.players.concat(newPlayer)
         }
         const newState = { ...state,
             ...changedState
@@ -130,24 +145,11 @@ export function gameReducer(state = gameState, action) {
                 }
             }
         })
-        const countCheck = () => {
-            if(state.counter >= state.players.length){
-                return 0;
-            } else {
-                return state.counter;
-            }
-        }
-        let localCounter = state.counter;
-        let smallBlindPos = localCounter + 1;
-        let bigBlindPos = localCounter + 2;
+        
 
 
         const changedState = {
-            counter: countCheck(),
             players: updatedPlayers,
-            dealer: updatedPlayers[state.counter],
-            smallBlind: updatedPlayers[smallBlindPos],
-            bigBlind: updatedPlayers[bigBlindPos]
         }
         const newState = {...state, ...changedState};
         return newState;
@@ -167,9 +169,9 @@ export function gameReducer(state = gameState, action) {
         const changedState = {
             counter: move,
             players: updatedPlayers,
-            dealer: updatedPlayers[state.counter],
-            smallBlind: updatedPlayers[smallBlindPos++],
-            bigBlind: updatedPlayers[bigBlindPos++]
+            // dealer: updatedPlayers[state.counter],
+            // smallBlind: updatedPlayers[smallBlindPos++],
+            // bigBlind: updatedPlayers[bigBlindPos++]
         };
         const newState = {...state, ...changedState};
         return newState;
