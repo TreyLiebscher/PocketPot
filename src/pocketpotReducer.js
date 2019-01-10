@@ -40,7 +40,7 @@ export function gameReducer(state = gameState, action) {
         const changedState = {
             loading: false,
             error: null,
-            players: state.players.concat(action.name)
+            players: state.players.concat(action.player)
         }
         const newState = { ...state,
             ...changedState
@@ -82,13 +82,31 @@ export function gameReducer(state = gameState, action) {
     } 
     // Add chips to players inventory
     else if (action.type === ADD_CHIPS) {
-        return state.players.map((player) => {
-            if (player.name !== action.chips.name){
-                return player;
+        let playerPos;
+        for(let i = 0; i < state.players.length; i++){
+            if(state.players[i].name === action.chips.name){
+                playerPos = i;
             }
-            return {...player, ...action.chips}
-        });
+        }
 
+        const originalPlayers = state.players.slice();
+
+        originalPlayers[playerPos] = {
+            name: action.chips.name,
+            chips: {
+                white: state.players[playerPos].chips.white + action.chips.chips.white,
+                green: state.players[playerPos].chips.green + action.chips.chips.green,
+                red: state.players[playerPos].chips.red + action.chips.chips.red,
+                blue: state.players[playerPos].chips.blue + action.chips.chips.blue,
+                black: state.players[playerPos].chips.black + action.chips.chips.black,
+            }
+        }
+
+        const changedState = {
+            players: originalPlayers
+        }
+        const newState = {...state, ...changedState};
+        return newState;
     }
 
     return state;

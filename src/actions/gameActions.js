@@ -1,7 +1,7 @@
 export const ADD_PLAYER = 'ADD_PLAYER';
-export const addPlayer = (name) => ({
+export const addPlayer = (player) => ({
     type: ADD_PLAYER,
-    name
+    player
 });
 
 export const CHIP_VALUE = 'CHIP_VALUE';
