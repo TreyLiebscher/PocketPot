@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addPlayer, chipValue, addChips, distChips } from '../actions/gameActions';
+import { addPlayer, chipValue, addChips, distChips, handOver } from '../actions/gameActions';
 import store from '../store';
 
 
@@ -72,8 +72,11 @@ class SetupGame extends Component {
         return (
             <div className="container">
                 <div className="setup-game">New game setup...</div>
+                {/* <div>Dealer: {this.props.game.dealer.name}</div>
+                <div>Small Blind: {this.props.game.smallBlind.name}</div>
+                <div>Big Blind: {this.props.game.bigBlind.name}</div> */}
                 <div>{players}</div>
-                <button className="test-button" onClick={e => this.props.dispatch(addChips(newChips))}>Give Chips</button>
+                <button className="test-button" onClick={e => this.props.dispatch(handOver())}>Shift dealer</button>
                 <button className="test-button" onClick={e => this.props.dispatch(distChips())}>Dist chips</button>
             </div>
         )
