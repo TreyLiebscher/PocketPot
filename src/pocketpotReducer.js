@@ -129,7 +129,7 @@ export function gameReducer(state = gameState, action) {
         const newState = {...state, ...changedState};
         return newState;
     }
-
+    // Distribute desired chip amounts evenly amongst players
     else if (action.type === DIST_CHIPS){
         const originalPlayers = state.players.slice();
         const playerCount = originalPlayers.length;
@@ -142,36 +142,23 @@ export function gameReducer(state = gameState, action) {
                     red: Math.floor(state.chipValues.red.quantity / playerCount),
                     blue: Math.floor(state.chipValues.blue.quantity / playerCount),
                     black: Math.floor(state.chipValues.black.quantity / playerCount)
-                }
+                },
+                status: player.status
             }
         })
         
-
-
         const changedState = {
             players: updatedPlayers,
         }
         const newState = {...state, ...changedState};
         return newState;
     }
-
+    // When a hand is finished, chips are awarded/removed and dealer status moves to next player
     else if(action.type = HAND_OVER){
         const updatedPlayers = state.players.slice();
-        // const countCheck = () => {return state.counter >= state.players.length ? 0 : state.counter + 1};
-        
-        let smallBlindPos = state.counter + 1;
-        let move = state.counter + 1;
-        let bigBlindPos = state.counter + 2;
-        if(state.counter >= updatedPlayers.length){
-            bigBlindPos = 0;
-        }
 
         const changedState = {
-            counter: move,
             players: updatedPlayers,
-            // dealer: updatedPlayers[state.counter],
-            // smallBlind: updatedPlayers[smallBlindPos++],
-            // bigBlind: updatedPlayers[bigBlindPos++]
         };
         const newState = {...state, ...changedState};
         return newState;
