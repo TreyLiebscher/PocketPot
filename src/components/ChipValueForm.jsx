@@ -50,16 +50,43 @@ export class ChipValueForm extends React.Component {
 
         return (
             <form className="chipValue-form" onSubmit={this.onSubmit}>
-                <input type="text" ref={input => this.whiteVal = input} />
-                <input type="text" ref={input => this.whiteCount = input} />
-                <input type="text" ref={input => this.greenVal = input} />
-                <input type="text" ref={input => this.greenCount = input} />
-                <input type="text" ref={input => this.redVal = input} />
-                <input type="text" ref={input => this.redCount = input} />
-                <input type="text" ref={input => this.blueVal = input} />
-                <input type="text" ref={input => this.blueCount = input} />
-                <input type="text" ref={input => this.blackVal = input} />
-                <input type="text" ref={input => this.blackCount = input} />
+                
+                <div class="chip white"></div>
+                <label for="whiteVal">Value</label>
+                <input id="whiteVal" type="number" ref={input => this.whiteVal = input} />
+                
+                <label for="whiteCount">Quantity</label>
+                <input id="whiteCount" type="number" ref={input => this.whiteCount = input} />
+                
+                <div class="chip green"></div>
+                <label for="blueVal">Value</label>
+                <input id="greenVal" type="text" ref={input => this.greenVal = input} />
+                
+
+                <label for="greenCount">Quantity</label>
+                <input id="greenCount" type="text" ref={input => this.greenCount = input} />
+                
+                <div class="chip red"></div>                
+                <label for="redVal">Value</label>
+                <input id="redVal" type="text" ref={input => this.redVal = input} />
+                
+                <label for="redCount">Quantity</label>
+                <input id="redCount" type="text" ref={input => this.redCount = input} />
+                
+                <div class="chip blue"></div>
+                <label for="blueVal">Value</label>
+                <input id="blueVal" type="text" ref={input => this.blueVal = input} />
+                
+                <label for="blueCount">Quantity</label>
+                <input id="blueCount" type="text" ref={input => this.blueCount = input} />
+                
+                <div class="chip black"></div>
+                <label for="blackVal">Value</label>
+                <input id="blackVal" type="text" ref={input => this.blackVal = input} />
+                
+                <label for="blackCount">Quantity</label>
+                <input id="blackCount" type="text" ref={input => this.blackCount = input} />
+                
                 <button>Add</button>
             </form>
         );
