@@ -31,7 +31,7 @@ export class PlayerForm extends React.Component {
     render() {
 
         return (
-            <form className="card add-form" onSubmit={this.onSubmit}>
+            <form className="player-form" onSubmit={this.onSubmit}>
                 <input type="text" ref={input => this.textInput = input} />
                 <button>Add</button>
             </form>
