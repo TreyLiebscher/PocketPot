@@ -14,3 +14,27 @@
     display: flex;
     flex-direction: column;
 }
+
+.chip-holder {
+    display: flex;
+}
+
+.green {
+    background-color: green;
+    color: white;
+}
+
+.red {
+    background-color: red;
+    color: white;
+}
+
+.blue {
+    background-color: blue;
+    color: white;
+}
+
+.black {
+    background-color: black;
+    color: white;
+}
