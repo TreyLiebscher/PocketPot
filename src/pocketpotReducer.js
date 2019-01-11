@@ -33,7 +33,13 @@ const gameState = {
             quantity: 0
         }
     },
-    pot: null,
+    pot: {
+        white: 0,
+        green: 0,
+        red: 0,
+        blue: 0,
+        black: 0
+    },
 }
 
 export function gameReducer(state = gameState, action) {
