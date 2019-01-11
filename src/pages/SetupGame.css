@@ -19,6 +19,12 @@
     display: flex;
 }
 
+.chip {
+    height: 30px;
+    width: 30px;
+    border: 1px solid black;
+}
+
 .green {
     background-color: green;
     color: white;
