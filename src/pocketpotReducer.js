@@ -33,10 +33,6 @@ const gameState = {
             quantity: 0
         }
     },
-    dealer: {name: 'Not set'},
-    counter: 0,
-    smallBlind: {name: 'Not set'},
-    bigBlind: {name: 'Not set'},
     pot: null,
 }
 
@@ -112,14 +108,22 @@ export function gameReducer(state = gameState, action) {
 
         const originalPlayers = state.players.slice();
 
+        const whiteChips = parseFloat(state.players[playerPos].chips.white) + parseFloat(action.chips.chips.white);
+        const greenChips = parseFloat(state.players[playerPos].chips.green) + parseFloat(action.chips.chips.green);
+        const redChips = parseFloat(state.players[playerPos].chips.red) + parseFloat(action.chips.chips.red);
+        const blueChips = parseFloat(state.players[playerPos].chips.blue) + parseFloat(action.chips.chips.blue);
+        const blackChips = parseFloat(state.players[playerPos].chips.black) + parseFloat(action.chips.chips.black); 
+
+        console.log(whiteChips)
+
         originalPlayers[playerPos] = {
             name: action.chips.name,
             chips: {
-                white: state.players[playerPos].chips.white + action.chips.chips.white,
-                green: state.players[playerPos].chips.green + action.chips.chips.green,
-                red: state.players[playerPos].chips.red + action.chips.chips.red,
-                blue: state.players[playerPos].chips.blue + action.chips.chips.blue,
-                black: state.players[playerPos].chips.black + action.chips.chips.black,
+                white: whiteChips,
+                green:  greenChips,
+                red:    redChips,
+                blue:   blueChips,
+                black:  blackChips,
             }
         }
 
@@ -137,11 +141,11 @@ export function gameReducer(state = gameState, action) {
             return {
                 name: player.name,
                 chips: {
-                    white: Math.floor(state.chipValues.white.quantity / playerCount),
-                    green: Math.floor(state.chipValues.green.quantity / playerCount),
-                    red: Math.floor(state.chipValues.red.quantity / playerCount),
-                    blue: Math.floor(state.chipValues.blue.quantity / playerCount),
-                    black: Math.floor(state.chipValues.black.quantity / playerCount)
+                    white: state.chipValues.white.quantity,
+                    green: state.chipValues.green.quantity,
+                    red: state.chipValues.red.quantity,
+                    blue: state.chipValues.blue.quantity,
+                    black: state.chipValues.black.quantity
                 },
                 status: player.status
             }
