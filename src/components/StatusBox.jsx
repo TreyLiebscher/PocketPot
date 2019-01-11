@@ -3,9 +3,9 @@ import React, {component} from 'react';
 class StatusBox extends React.Component {
     render(){
 
-        const players = this.props.game.players.map((player) => {
+        const players = this.props.game.players.map((player, index) => {
             // TODO consider creating a component for chips, logic between diff value chips could become complex
-            return  <li className="player-list-item">
+            return  <li className="player-list-item" key={index}>
                         <div>{player.name}</div>
                         <div className="chip-holder">
                             <div className="chip white">${this.props.game.chipValues.white.value}</div>
