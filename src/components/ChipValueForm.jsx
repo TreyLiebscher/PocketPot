@@ -10,26 +10,33 @@ export class ChipValueForm extends React.Component {
         this.setValue = this.setValue.bind(this);
         this.state = {
             whiteVal: null,
+            whiteCount: null,
             greenVal: null,
+            greenCount: null,
             redVal: null,
+            redCount: null,
             blueVal: null,
-            blackVal: null
+            blueCount: null,
+            blackVal: null,
+            blackCount: null
         }
     }
 
     onSubmit(event) {
         event.preventDefault();
         
-        const whiteVal = this.whiteVal.value.trim();
-        const whiteCount = this.whiteCount.value.trim();
-        const greenVal = this.greenVal.value.trim();
-        const greenCount = this.greenCount.value.trim();
-        const redVal = this.redVal.value.trim();
-        const redCount = this.redCount.value.trim();
-        const blueVal = this.blueVal.value.trim();
-        const blueCount = this.blueCount.value.trim();
-        const blackVal = this.blackVal.value.trim();
-        const blackCount = this.blackCount.value.trim();
+        const {
+            whiteVal,
+            whiteCount,
+            greenVal,
+            greenCount,
+            redVal,
+            redCount,
+            blueVal,
+            blueCount,
+            blackVal,
+            blackCount
+        } = this.state;
 
         const chipValues = {
             white: {value: whiteVal, quantity: whiteCount},
@@ -41,16 +48,19 @@ export class ChipValueForm extends React.Component {
 
         this.props.dispatch(chipValue(chipValues))
         
-        this.whiteVal.value = '';
-        this.whiteCount.value = '';
-        this.greenVal.value = '';
-        this.greenCount.value = '';
-        this.redVal.value = '';
-        this.redCount.value = '';
-        this.blueVal.value = '';
-        this.blueCount.value = '';
-        this.blackVal.value = '';
-        this.blackCount.value = '';
+        // More than likely won't need this, as submission will take user to another page
+        // Might even be better to NOT clear the inputs, so a user can go back and adjust
+        // if they desire to do so
+        // this.whiteVal.value = '';
+        // this.whiteCount.value = '';
+        // this.greenVal.value = '';
+        // this.greenCount.value = '';
+        // this.redVal.value = '';
+        // this.redCount.value = '';
+        // this.blueVal.value = '';
+        // this.blueCount.value = '';
+        // this.blackVal.value = '';
+        // this.blackCount.value = '';
     }
 
     setValue(e){
@@ -70,7 +80,7 @@ export class ChipValueForm extends React.Component {
                 <input id="whiteVal" type="number" ref={input => this.whiteVal = input} onChange={ this.setValue }/>
                 
                 <label htmlFor="whiteCount">Quantity</label>
-                <input id="whiteCount" type="number" ref={input => this.whiteCount = input}/>
+                <input id="whiteCount" type="number" ref={input => this.whiteCount = input} onChange={ this.setValue }/>
                 
                 <Chip chipValue={this.state.greenVal} chipColor="green"/>
                 <label htmlFor="blueVal">Value</label>
@@ -78,28 +88,28 @@ export class ChipValueForm extends React.Component {
                 
 
                 <label htmlFor="greenCount">Quantity</label>
-                <input id="greenCount" type="text" ref={input => this.greenCount = input} />
+                <input id="greenCount" type="text" ref={input => this.greenCount = input} onChange={ this.setValue }/>
                 
                 <Chip chipValue={this.state.redVal} chipColor="red"/>
                 <label htmlFor="redVal">Value</label>
                 <input id="redVal" type="text" ref={input => this.redVal = input} onChange={ this.setValue }/>
                 
                 <label htmlFor="redCount">Quantity</label>
-                <input id="redCount" type="text" ref={input => this.redCount = input} />
+                <input id="redCount" type="text" ref={input => this.redCount = input} onChange={ this.setValue }/>
                 
                 <Chip chipValue={this.state.blueVal} chipColor="blue"/>
                 <label htmlFor="blueVal">Value</label>
                 <input id="blueVal" type="text" ref={input => this.blueVal = input} onChange={ this.setValue }/>
                 
                 <label htmlFor="blueCount">Quantity</label>
-                <input id="blueCount" type="text" ref={input => this.blueCount = input} />
+                <input id="blueCount" type="text" ref={input => this.blueCount = input} onChange={ this.setValue }/>
                 
                 <Chip chipValue={this.state.blackVal} chipColor="black"/>
                 <label htmlFor="blackVal">Value</label>
                 <input id="blackVal" type="text" ref={input => this.blackVal = input} onChange={ this.setValue }/>
                 
                 <label htmlFor="blackCount">Quantity</label>
-                <input id="blackCount" type="text" ref={input => this.blackCount = input} />
+                <input id="blackCount" type="text" ref={input => this.blackCount = input} onChange={ this.setValue }/>
                 
                 <button>Add</button>
             </form>
