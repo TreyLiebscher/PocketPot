@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { chipValue } from '../actions/gameActions';
 import Chip from '../components/Chip';
@@ -18,7 +19,8 @@ export class ChipValueForm extends React.Component {
             blueVal: null,
             blueCount: null,
             blackVal: null,
-            blackCount: null
+            blackCount: null,
+            chipValSet: false,
         }
     }
 
@@ -45,8 +47,9 @@ export class ChipValueForm extends React.Component {
             blue: {value: blueVal, quantity: blueCount},
             black: {value: blackVal, quantity: blackCount}
         }
-
+        this.setState({chipValSet: true});
         this.props.dispatch(chipValue(chipValues))
+        
         
         // More than likely won't need this, as submission will take user to another page
         // Might even be better to NOT clear the inputs, so a user can go back and adjust
@@ -71,7 +74,10 @@ export class ChipValueForm extends React.Component {
 
 
     render() {
-
+        const {chipValSet} = this.state;
+        if(chipValSet === true){
+            return <Redirect to='/'/>;
+        }
         return (
             <form className="chipValue-form" onSubmit={this.onSubmit}>
                 
