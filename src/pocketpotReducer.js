@@ -165,7 +165,49 @@ export function gameReducer(state = gameState, action) {
     }
     // When a hand is finished, chips are awarded/removed and dealer status moves to next player
     else if(action.type = HAND_OVER){
+
+
         const updatedPlayers = state.players.slice();
+        const playerLength = updatedPlayers.length;
+        let pos = 0;
+        
+        for(let i = 0; i < playerLength; i++){
+
+            if(updatedPlayers[i].status === 'dealer'){
+                updatedPlayers[i].status = 'player';
+                if(i === playerLength - 1){
+                    updatedPlayers[0].status = 'dealer';
+                    updatedPlayers[1].status = 'smallBlind';
+                    updatedPlayers[2].status = 'bigBlind';
+                }
+                pos++;
+            }
+            else if(updatedPlayers[i].status === 'smallBlind'){
+                updatedPlayers[i].status = 'dealer';
+                if(i === playerLength - 1){
+                    updatedPlayers[0].status = 'smallBlind';
+                    updatedPlayers[1].status = 'bigBlind';
+                }
+                pos++;
+            }
+            else if(updatedPlayers[i].status === 'bigBlind'){
+                updatedPlayers[i].status = 'smallBlind';
+                if(i === playerLength - 1){
+                    updatedPlayers[0].status = 'bigBlind';
+                }
+                pos++;
+            }
+            else if(updatedPlayers[i].status === 'player' && pos === 3){
+                updatedPlayers[i].status = 'bigBlind';
+                pos++;
+
+            }
+            else if(updatedPlayers[i].status === 'player' && pos === 4){
+                updatedPlayers[i].status = 'player';
+                pos++;
+            } 
+        }
+        console.log(updatedPlayers)
 
         const changedState = {
             players: updatedPlayers,
