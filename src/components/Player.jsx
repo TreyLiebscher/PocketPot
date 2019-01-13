@@ -7,6 +7,7 @@ export class Player extends React.Component {
         return (
             <li className="player-list-item">
                 <div className="player-name">{this.props.player.name}</div>
+                <div className="player-status">{this.props.player.status}</div>
                 <Chip chipColor="white" chipValue={this.props.chipValues.white.value} chipQuantity={this.props.player.chips.white}/>
                 <Chip chipColor="green" chipValue={this.props.chipValues.green.value} chipQuantity={this.props.player.chips.green}/>
                 <Chip chipColor="red" chipValue={this.props.chipValues.red.value} chipQuantity={this.props.player.chips.red}/>
