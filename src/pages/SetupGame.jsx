@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { addPlayer, chipValue, addChips, distChips } from '../actions/gameActions';
+import { addPlayer, chipValue, addChips, distChips, handOver } from '../actions/gameActions';
 import PlayerForm from '../components/PlayerForm';
 import store from '../store';
 import './SetupGame.css'
@@ -50,6 +50,7 @@ class SetupGame extends Component {
                 <PlayerForm />
                 <button onClick={e => this.submitPlayers()}>Submit</button>
                 <button className="test-button" onClick={e => {this.props.dispatch(distChips())}}>Dist chips</button>
+                <button className="test-button" onClick={e => {this.props.dispatch(handOver())}}>Dist chips</button>
                 <StatusBox game={currentGame} />
             </div>
         )
