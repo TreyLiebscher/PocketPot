@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addPlayer, chipValue, addChips, distChips, handOver } from '../actions/gameActions';
+import { Redirect } from 'react-router-dom';
+import { addPlayer, chipValue, addChips, distChips } from '../actions/gameActions';
 import PlayerForm from '../components/PlayerForm';
 import store from '../store';
 import './SetupGame.css'
@@ -23,39 +24,33 @@ class SetupGame extends Component {
 
     // }
     //
+    constructor(){
+        super();
+        this.state = {
+            playersSubmitted: false
+        }
+    }
+
+    submitPlayers(){
+        this.setState({playersSubmitted: true})
+    }
 
     render(){
 
-        // TODO refactor playerStatus into its own component
-        const playerStatus = this.props.game.players.map((player, index) => {
-            let dealer;
-            let smallBlind;
-            let bigBlind;
-            if(player.status === 'dealer'){
-                dealer = player.name;
-                return <div key={index}>Dealer - {dealer}</div>
-            }
-            else if (player.status === 'smallBlind'){
-                smallBlind = player.name;
-                return <div key={index}>Small Blind - {smallBlind}</div>
-            }
-            else if (player.status === 'bigBlind'){
-                bigBlind = player.name;
-                return <div  key={index}>Big Blind - {bigBlind}</div>
-            }
-        })
-
         const currentGame = this.props.game;
+        const {playersSubmitted} = this.state;
+        
+        if(playersSubmitted === true){
+            return <Redirect to='/set-chips' />
+        }
         
         return (
             <div className="container">
                 <div className="setup-game">New game setup...</div>
                 <PlayerForm />
-                <div>{playerStatus}</div>
-                <button className="test-button" onClick={e => this.props.dispatch(handOver())}>Shift dealer</button>
+                <button onClick={e => this.submitPlayers()}>Submit</button>
                 <button className="test-button" onClick={e => {this.props.dispatch(distChips())}}>Dist chips</button>
                 <StatusBox game={currentGame} />
-                <ChipValueForm />
             </div>
         )
     }
