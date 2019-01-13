@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { addPlayer, chipValue, addChips, distChips, handOver } from '../actions/gameActions';
+import { addPlayer, chipValue, addChips, distChips, handOver, makeBet } from '../actions/gameActions';
 import PlayerForm from '../components/PlayerForm';
 import store from '../store';
 import './SetupGame.css'
@@ -17,6 +17,7 @@ import ChipValueForm from '../components/ChipValueForm';
 //     black: {value: 25, quantity: 5}
 // }))
 //
+
 
 class SetupGame extends Component {
     // retain for future use  
@@ -50,7 +51,17 @@ class SetupGame extends Component {
                 <PlayerForm />
                 <button onClick={e => this.submitPlayers()}>Submit</button>
                 <button className="test-button" onClick={e => {this.props.dispatch(distChips())}}>Dist chips</button>
-                <button className="test-button" onClick={e => {this.props.dispatch(handOver())}}>Dist chips</button>
+                <button className="test-button" onClick={e => {this.props.dispatch(handOver())}}>Shift Roles</button>
+                <button className="test-button" onClick={e => {this.props.dispatch(makeBet({
+                    player: 'John',
+                    chips: {
+                        white: 10,
+                        green: 2,
+                        red: 0,
+                        blue: 0,
+                        black: 0
+                    }            
+                    }))}}>Test Bet</button>
                 <StatusBox game={currentGame} />
             </div>
         )
