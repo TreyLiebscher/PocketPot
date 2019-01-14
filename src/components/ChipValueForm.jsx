@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { chipValue } from '../actions/gameActions';
+import { chipValue, distChips } from '../actions/gameActions';
 import Chip from '../components/Chip';
 
 export class ChipValueForm extends React.Component {
@@ -48,7 +48,8 @@ export class ChipValueForm extends React.Component {
             black: {value: blackVal, quantity: blackCount}
         }
         this.setState({chipValSet: true});
-        this.props.dispatch(chipValue(chipValues))
+        this.props.dispatch(chipValue(chipValues));
+        this.props.dispatch(distChips());
         
         
         // More than likely won't need this, as submission will take user to another page
@@ -67,7 +68,6 @@ export class ChipValueForm extends React.Component {
     }
 
     setValue(e){
-        console.log(e.target.id);
         this.setState({[e.target.id]: e.target.value});
     }
 
@@ -76,7 +76,7 @@ export class ChipValueForm extends React.Component {
     render() {
         const {chipValSet} = this.state;
         if(chipValSet === true){
-            return <Redirect to='/'/>;
+            return <Redirect to='/active-game'/>;
         }
         return (
             <form className="chipValue-form" onSubmit={this.onSubmit}>
