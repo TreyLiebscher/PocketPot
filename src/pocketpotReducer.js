@@ -3,7 +3,8 @@ import {
     CHIP_VALUE,
     ADD_CHIPS,
     DIST_CHIPS,
-    HAND_OVER
+    HAND_OVER,
+    MAKE_BET
 } from '../src/actions/gameActions';
 
 
@@ -129,7 +130,7 @@ export function gameReducer(state = gameState, action) {
                 green:  greenChips,
                 red:    redChips,
                 blue:   blueChips,
-                black:  blackChips,
+                black:  blackChips
             }
         }
 
@@ -164,12 +165,103 @@ export function gameReducer(state = gameState, action) {
         return newState;
     }
     // When a hand is finished, chips are awarded/removed and dealer status moves to next player
-    else if(action.type = HAND_OVER){
+    else if(action.type === HAND_OVER){
+
+
         const updatedPlayers = state.players.slice();
+        const playerLength = updatedPlayers.length;
+        let pos = 0;
+        
+        for(let i = 0; i < playerLength; i++){
+
+            if(updatedPlayers[i].status === 'dealer'){
+                updatedPlayers[i].status = 'player';
+                if(i === playerLength - 1){
+                    updatedPlayers[0].status = 'dealer';
+                    updatedPlayers[1].status = 'smallBlind';
+                    updatedPlayers[2].status = 'bigBlind';
+                }
+                pos++;
+            }
+            else if(updatedPlayers[i].status === 'smallBlind'){
+                updatedPlayers[i].status = 'dealer';
+                if(i === playerLength - 1){
+                    updatedPlayers[0].status = 'smallBlind';
+                    updatedPlayers[1].status = 'bigBlind';
+                }
+                pos++;
+            }
+            else if(updatedPlayers[i].status === 'bigBlind'){
+                updatedPlayers[i].status = 'smallBlind';
+                if(i === playerLength - 1){
+                    updatedPlayers[0].status = 'bigBlind';
+                }
+                pos++;
+            }
+            else if(updatedPlayers[i].status === 'player' && pos === 3){
+                updatedPlayers[i].status = 'bigBlind';
+                pos++;
+            }
+            else if(updatedPlayers[i].status === 'player' && pos === 4){
+                updatedPlayers[i].status = 'player';
+                pos++;
+            } 
+        }
+
+
+        const changedState = {
+            players: updatedPlayers
+        };
+        const newState = {...state, ...changedState};
+        return newState;
+    }
+    else if(action.type === MAKE_BET){
+        const updatedPlayers = state.players.slice();
+        let playerPos;
+        let player = action.bet.player;
+        for(let i = 0; i < updatedPlayers.length; i++){
+            if(updatedPlayers[i].name === player){
+                playerPos = i;
+            }
+        }
+
+        const whiteChips = parseFloat(state.players[playerPos].chips.white) - parseFloat(action.bet.chips.white);
+        const greenChips = parseFloat(state.players[playerPos].chips.green) - parseFloat(action.bet.chips.green);
+        const redChips = parseFloat(state.players[playerPos].chips.red) - parseFloat(action.bet.chips.red);
+        const blueChips = parseFloat(state.players[playerPos].chips.blue) - parseFloat(action.bet.chips.blue);
+        const blackChips = parseFloat(state.players[playerPos].chips.black) - parseFloat(action.bet.chips.black);
+
+        updatedPlayers[playerPos] = {
+            name: action.bet.player,
+            status: state.players[playerPos].status,
+            chips: {
+                white: whiteChips,
+                green:  greenChips,
+                red:    redChips,
+                blue:   blueChips,
+                black:  blackChips
+            }
+        }
+
+        const whitePot = parseFloat(state.pot.white) + parseFloat(action.bet.chips.white);
+        const greenPot = parseFloat(state.pot.green) + parseFloat(action.bet.chips.green);
+        const redPot = parseFloat(state.pot.red) + parseFloat(action.bet.chips.red);
+        const bluePot = parseFloat(state.pot.blue) + parseFloat(action.bet.chips.blue);
+        const blackPot = parseFloat(state.pot.black) + parseFloat(action.bet.chips.black);
+
+
+        const updatedPot = {
+            white: whitePot,
+            green: greenPot,
+            red: redPot,
+            blue: bluePot,
+            black: blackPot
+        }
 
         const changedState = {
             players: updatedPlayers,
-        };
+            pot: updatedPot
+        }
         const newState = {...state, ...changedState};
         return newState;
     }

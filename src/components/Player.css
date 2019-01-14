@@ -1,0 +1,11 @@
+.dealer {
+    background-color: green;
+}
+
+.small-blind {
+    background-color: yellow;
+}
+
+.big-blind {
+    background-color: red;
+}

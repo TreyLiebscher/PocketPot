@@ -26,3 +26,9 @@ export const HAND_OVER = 'HAND_OVER';
 export const handOver = () => ({
     type: HAND_OVER
 });
+
+export const MAKE_BET = 'MAKE_BET';
+export const makeBet = (bet) => ({
+    type: MAKE_BET,
+    bet
+});

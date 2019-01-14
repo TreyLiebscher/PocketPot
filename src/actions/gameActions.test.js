@@ -1,5 +1,7 @@
 import { ADD_PLAYER, addPlayer, CHIP_VALUE, chipValue, ADD_CHIPS, addChips, DIST_CHIPS, distChips } from './gameActions';
 
+import {gameReducer} from '../pocketpotReducer';
+
 describe('addPlayer', () => {
     it('Should return the action', () => {
         const player = {
@@ -15,6 +17,107 @@ describe('addPlayer', () => {
         const action = addPlayer(player);
         expect(action.type).toEqual(ADD_PLAYER);
         expect(action.player).toEqual(player);
+    });
+
+    it('Should assign status based on order of entry', () => {
+        let state = {
+            players: []
+        }
+        const player1 = {
+            name: 'Player1',
+            chips: {
+                white: 0,
+                green: 0,
+                red: 0,
+                blue: 0,
+                black: 0
+            }
+        };
+        const player2 = {
+            name: 'Player2',
+            chips: {
+                white: 0,
+                green: 0,
+                red: 0,
+                blue: 0,
+                black: 0
+            }
+        };
+        const player3 = {
+            name: 'Player3',
+            chips: {
+                white: 0,
+                green: 0,
+                red: 0,
+                blue: 0,
+                black: 0
+            }
+        };
+        const player4 = {
+            name: 'Player4',
+            chips: {
+                white: 0,
+                green: 0,
+                red: 0,
+                blue: 0,
+                black: 0
+            }
+        };
+        state = gameReducer(state, addPlayer(player1));
+        state = gameReducer(state, addPlayer(player2));
+        state = gameReducer(state, addPlayer(player3));
+        state = gameReducer(state, addPlayer(player4));
+        expect(state).toEqual({
+            error: null,
+            loading: false,
+            players: [
+                {
+                    name: 'Player1',
+                    chips: {
+                        white: 0,
+                        green: 0,
+                        red: 0,
+                        blue: 0,
+                        black: 0
+                    },
+                    status: 'dealer'
+                },
+                {
+                    name: 'Player2',
+                    chips: {
+                        white: 0,
+                        green: 0,
+                        red: 0,
+                        blue: 0,
+                        black: 0
+                    },
+                    status: 'smallBlind'
+                },
+                {
+                    name: 'Player3',
+                    chips: {
+                        white: 0,
+                        green: 0,
+                        red: 0,
+                        blue: 0,
+                        black: 0
+                    },
+                    status: 'bigBlind'
+                },
+                {
+                    name: 'Player4',
+                    chips: {
+                        white: 0,
+                        green: 0,
+                        red: 0,
+                        blue: 0,
+                        black: 0
+                    },
+                    status: 'player'
+                },
+            ]
+        });
+
     });
 });
 
