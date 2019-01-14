@@ -5,7 +5,7 @@ import './Player.css'
 export class Player extends React.Component {
 
     render(){
-        const {status} = this.props.player;
+        const {status, betting} = this.props.player;
         const displayStatus = () => {
             if(status === 'dealer'){
                 return <div className='player-status dealer'>{status}</div>
@@ -16,6 +16,11 @@ export class Player extends React.Component {
             } else {
                 return <div className='player-status player-normal'>{status}</div>
             }
+        }
+        const activeBet = () => {
+            if(betting === true){
+                return console.log('Bet form here')
+            };
         }
         return (
             <li className="player-list-item">
