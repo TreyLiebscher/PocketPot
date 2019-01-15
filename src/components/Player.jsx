@@ -17,15 +17,34 @@ export class Player extends React.Component {
                 return <div className='player-status player-normal'>{status}</div>
             }
         }
+
+        const totalChipValue = () => {
+            const values = this.props.chipValues;
+            const chips = this.props.player.chips;
+            
+            const whiteChips = values.white.value * chips.white;
+            const greenChips = values.green.value * chips.green;
+            const redChips = values.red.value * chips.red;
+            const blueChips = values.blue.value * chips.blue;
+            const blackChips = values.black.value * chips.black;
+            
+            const totalValue = whiteChips + greenChips + redChips + blueChips + blackChips;
+
+            const currency = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" })
+            return <div>{currency.format(totalValue)}</div>
+        }
+
         const activeBet = () => {
             if(betting === true){
                 return console.log('Bet form here')
             };
         }
+        
         return (
             <li className="player-list-item">
                 <div className="player-name">{this.props.player.name}</div>
                 {displayStatus()}
+                {totalChipValue()}
                 <Chip chipColor="white" chipValue={this.props.chipValues.white.value} chipQuantity={this.props.player.chips.white}/>
                 <Chip chipColor="green" chipValue={this.props.chipValues.green.value} chipQuantity={this.props.player.chips.green}/>
                 <Chip chipColor="red" chipValue={this.props.chipValues.red.value} chipQuantity={this.props.player.chips.red}/>
