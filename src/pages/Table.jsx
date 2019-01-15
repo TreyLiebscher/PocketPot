@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import StatusBox from '../components/StatusBox';
 
 // Will hold all essential components during game
@@ -10,7 +11,11 @@ export class Table extends React.Component {
         const currentGame = this.props.game;
 
         return (
+            <div>
+            <Link to="/">Home</Link>
             <StatusBox game={currentGame}/>
+            </div>
+
         )
     }
 }
