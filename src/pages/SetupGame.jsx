@@ -7,6 +7,7 @@ import store from '../store';
 import './SetupGame.css'
 import StatusBox from '../components/StatusBox';
 import ChipValueForm from '../components/ChipValueForm';
+import Flop from '../components/Flop';
 
 // for testing - TODO remove when no longer required
 // store.dispatch(chipValue({
@@ -48,6 +49,7 @@ class SetupGame extends Component {
         return (
             <div className="container">
                 <div className="setup-game">New game setup...</div>
+                <Flop players={currentGame.players}/>
                 <PlayerForm />
                 <button onClick={e => this.submitPlayers()}>Submit</button>
                 <button className="test-button" onClick={e => {this.props.dispatch(distChips())}}>Dist chips</button>
