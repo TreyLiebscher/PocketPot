@@ -7,7 +7,7 @@ import BetForm from './BetForm';
 export class Player extends React.Component {
 
     render(){
-        const {status, betting} = this.props.player;
+        const {status, betting, cards} = this.props.player;
         const displayStatus = () => {
             if(status === 'dealer'){
                 return <div className='player-status dealer'>{status}</div>
@@ -17,6 +17,25 @@ export class Player extends React.Component {
                 return <div className='player-status big-blind'>{status}</div>
             } else {
                 return <div className='player-status player-normal'>{status}</div>
+            }
+        }
+
+        const displayCards = () => {
+            if(cards.pos1.value !== null){
+                console.log('KIWI HELLO')
+                return <div>
+                    {/* <div>{cards.pos1.value.suit}</div> */}
+                    <div>{cards.pos1.value.name}</div>
+                    <div>
+                        <img style={{maxHeight: '50px', maxWidth: '50px'}} src={cards.pos1.value.image}></img>
+                    </div>
+                    {/* <div>{cards.pos2.value.suit}</div> */}
+                    <div>{cards.pos2.value.name}</div>
+                    <div>
+                        <img style={{maxHeight: '50px', maxWidth: '50px'}} src={cards.pos2.value.image}></img>
+                    </div>
+                </div> 
+
             }
         }
 
@@ -47,6 +66,7 @@ export class Player extends React.Component {
                 <div className="player-name">{this.props.player.name}</div>
                 {displayStatus()}
                 {totalChipValue()}
+                {displayCards()}
                 <Chip chipColor="white" chipValue={this.props.chipValues.white.value} chipQuantity={this.props.player.chips.white}/>
                 <Chip chipColor="green" chipValue={this.props.chipValues.green.value} chipQuantity={this.props.player.chips.green}/>
                 <Chip chipColor="red" chipValue={this.props.chipValues.red.value} chipQuantity={this.props.player.chips.red}/>

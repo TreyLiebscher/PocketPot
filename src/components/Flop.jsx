@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { GAME_CARDS } from './gameCards';
+import {giveCards} from '../actions/gameActions';
 // TODO import presentational component to sit inside of Flop
 
 export class Flop extends React.Component {
@@ -37,11 +38,21 @@ export class Flop extends React.Component {
         return Math.floor(Math.random() * Math.floor(deck));
     }
 
+    shuffle(deck){
+        for (let i = deck.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [deck[i], deck[j]] = [deck[j], deck[i]];
+        }
+        return deck;
+    }
+
     generateCard(number) {
         let returnArray = [];
-        let deck = GAME_CARDS.slice();
+        // initial shuffle
+        let deck = this.shuffle(GAME_CARDS.slice());
         let deckSize = 52;
         let testArray = [];
+        // second level shuffle
         for (let i = 0; i < number; i++) {
             const position = this.drawCard(deckSize);
             const card = deck.slice(position, position + 1);
@@ -69,6 +80,9 @@ export class Flop extends React.Component {
         dealCards.then((cards) => {
             const cardsArray = cards.flat();
             const playerCards = cardsArray.slice(5);
+            this.props.dispatch(giveCards(playerCards));
+            const testPlayers = playerCards.map((item) => {return {name: item.name, suit: item.suit}})
+            console.log(testPlayers)
             this.setState({
                 cardsDealt: true,
                 playerCards: playerCards, 

@@ -16,6 +16,12 @@ export const addChips = (chips) => ({
     chips
 });
 
+export const GIVE_CARDS = 'GIVE_CARDS';
+export const giveCards = (cards) => ({
+    type: GIVE_CARDS,
+    cards
+});
+
 export const DIST_CHIPS = 'DIST_CHIPS';
 export const distChips = (chips) => ({
     type: DIST_CHIPS,
