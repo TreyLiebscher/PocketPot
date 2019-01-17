@@ -4,7 +4,8 @@ import {
     ADD_CHIPS,
     DIST_CHIPS,
     HAND_OVER,
-    MAKE_BET
+    MAKE_BET,
+    GIVE_CARDS
 } from '../src/actions/gameActions';
 
 
@@ -147,6 +148,7 @@ export function gameReducer(state = gameState, action) {
         const updatedPlayers = originalPlayers.map((player) => {
             return {
                 name: player.name,
+                cards: player.cards,
                 chips: {
                     white: state.chipValues.white.quantity,
                     green: state.chipValues.green.quantity,
@@ -261,6 +263,37 @@ export function gameReducer(state = gameState, action) {
         const changedState = {
             players: updatedPlayers,
             pot: updatedPot
+        }
+        const newState = {...state, ...changedState};
+        return newState;
+    }
+    else if(action.type === GIVE_CARDS){
+        const originalPlayers = state.players.slice();
+        let cardCount = action.cards.length;
+        let position = 0;
+        const givenCards = action.cards;
+        console.log(cardCount);
+        const updatedPlayers = originalPlayers.map((player) => {
+            const returnObj =  {
+                name: player.name,
+                chips: player.chips,
+                status: player.status,
+                cards: {
+                    pos1: {
+                        value: givenCards[position],
+                        hidden: true
+                    },
+                    pos2: {
+                        value: givenCards[position + 1],
+                        hidden: true
+                    }
+                }
+            }
+            position = position + 2;
+            return returnObj;
+        });
+        const changedState = {
+            players: updatedPlayers
         }
         const newState = {...state, ...changedState};
         return newState;
