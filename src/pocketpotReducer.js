@@ -242,7 +242,8 @@ export function gameReducer(state = gameState, action) {
                 red:    redChips,
                 blue:   blueChips,
                 black:  blackChips
-            }
+            },
+            cards: state.players[playerPos].cards
         }
 
         const whitePot = parseFloat(state.pot.white) + parseFloat(action.bet.chips.white);
