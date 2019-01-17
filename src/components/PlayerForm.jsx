@@ -22,6 +22,16 @@ export class PlayerForm extends React.Component {
                 blue: 0,
                 black: 0
             },
+            cards: {
+                pos1: {
+                    value: null,
+                    hidden: true
+                },
+                pos2: {
+                    value: null,
+                    hidden: true
+                }
+            },
             status: null
         }
         this.props.dispatch(addPlayer(newPlayer))
