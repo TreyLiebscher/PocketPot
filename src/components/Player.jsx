@@ -72,7 +72,7 @@ export class Player extends React.Component {
                 <Chip chipColor="red" chipValue={this.props.chipValues.red.value} chipQuantity={this.props.player.chips.red}/>
                 <Chip chipColor="blue" chipValue={this.props.chipValues.blue.value} chipQuantity={this.props.player.chips.blue}/>
                 <Chip chipColor="black" chipValue={this.props.chipValues.black.value} chipQuantity={this.props.player.chips.black}/>
-                <BetForm />
+                <BetForm player={this.props.player}/>
             </li>
         )
     }
