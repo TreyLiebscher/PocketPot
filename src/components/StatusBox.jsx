@@ -6,7 +6,7 @@ class StatusBox extends React.Component {
     render(){
 
         const players = this.props.game.players.map((player, index) => {
-            return <Player player={player} chipValues={this.props.game.chipValues} key={index}/>
+            return <Player player={player} chipValues={this.props.game.chipValues} pot={this.props.game.pot} key={index}/>
         });
 
         const playerSection = () => {

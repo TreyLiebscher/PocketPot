@@ -49,7 +49,11 @@ class BetForm extends React.Component {
 
 
     showBetForm(){
-        this.setState({makeBet: true})
+        if(this.state.makeBet === false){
+            this.setState({makeBet: true})
+        } else {
+            this.setState({makeBet: false})
+        }
     }
 
     increaseBet(e){

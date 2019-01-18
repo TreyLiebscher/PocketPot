@@ -1,0 +1,12 @@
+.playing-card {
+    display: flex;
+    margin: 1em;
+    background-color: white;
+    color: black;
+    padding: 10px;
+    border: 2px solid black;
+}
+
+.player-card-holder .playing-card {
+    width: 70px;
+}
