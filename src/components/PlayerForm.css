@@ -1,0 +1,14 @@
+.form-input {
+    font-size: 16px;
+}
+
+.form-holder {
+    width: 50%;
+    margin: auto;
+    border: 2px solid green;
+}
+
+.player-form {
+    display: flex;
+    flex-direction: column;
+}

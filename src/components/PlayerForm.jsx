@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addPlayer } from '../actions/gameActions';
+import './PlayerForm.css';
 
 export class PlayerForm extends React.Component {
     constructor(props) {
@@ -41,10 +42,13 @@ export class PlayerForm extends React.Component {
     render() {
 
         return (
-            <form className="player-form" onSubmit={this.onSubmit}>
-                <input type="text" ref={input => this.textInput = input} />
-                <button>Add</button>
-            </form>
+            <div className="form-holder">
+                <form className="player-form" onSubmit={this.onSubmit}>
+                    <label htmlFor="player-input">Enter Player Name</label>
+                    <input id="player-input" className="form-input" type="text" ref={input => this.textInput = input} />
+                    <button>Add Player</button>
+                </form>
+            </div>
         );
     }
 }
