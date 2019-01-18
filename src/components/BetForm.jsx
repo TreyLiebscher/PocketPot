@@ -106,11 +106,25 @@ class BetForm extends React.Component {
     render(){
         const chips = this.props.game.chipValues;
 
+        const getTotal = (total, val) => {
+            return total + val;
+        }
+
+        const displayTotalBet = () => {
+            const whiteVal = chips.white.value * this.state.white;
+            const greenVal = chips.green.value * this.state.green;
+            const redVal = chips.red.value * this.state.red;
+            const blueVal = chips.blue.value * this.state.blue;
+            const blackVal = chips.black.value * this.state.black;
+            const total = [whiteVal, greenVal, redVal, blueVal, blackVal].reduce(getTotal);
+            const currency = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" })
+            return currency.format(total);
+        }
 
         const displayChipInterface = () => {
             if(this.state.makeBet === true){
                 return  <form className="bet-form" onSubmit={this.onSubmit}>
-                            <div>{this.state.totalBet}</div>
+                            <div>{displayTotalBet()}</div>
                             <button type="button" onClick={this.increaseBet} ref={button => this.chipColor = button}><Chip chipValue={chips.white.value} chipColor="white" chipQuantity={this.state.white}/></button>
                             <button type="button" onClick={this.increaseBet} ref={button => this.chipColor = button}><Chip chipValue={chips.green.value} chipColor="green" chipQuantity={this.state.green}/></button>
                             <button type="button" onClick={this.increaseBet} ref={button => this.chipColor = button}><Chip chipValue={chips.red.value} chipColor="red" chipQuantity={this.state.red}/></button>
