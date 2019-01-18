@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { GAME_CARDS } from './gameCards';
 import {giveCards} from '../actions/gameActions';
+import './Flop.css'
 // TODO import presentational component to sit inside of Flop
 
 export class Flop extends React.Component {
@@ -116,35 +117,35 @@ export class Flop extends React.Component {
         const flop = () => {
             if (this.state.cardsDealt === true) {
                 return  <div style={{display: 'flex', margin: '1em'}}>
-                            <div style={{display: 'flex', margin: '1em'}}>
+                            <div className="playing-card">
                                 <div style={{fontSize: '50px'}}>{this.state.pos1.value.name}</div>
                                 <div>
                                     <img style={{maxHeight: '50px', maxWidth: '50px'}} src={this.state.pos1.value.image}></img>
                                 </div>
                             </div>
 
-                            <div style={{display: 'flex', margin: '1em'}}>
+                            <div className="playing-card">
                                 <div style={{fontSize: '50px'}}>{this.state.pos2.value.name}</div>
                                 <div>
                                     <img style={{maxHeight: '50px', maxWidth: '50px'}} src={this.state.pos2.value.image}></img>
                                 </div>
                             </div>
                             
-                            <div style={{display: 'flex', margin: '1em'}}>
+                            <div className="playing-card">
                                 <div style={{fontSize: '50px'}}>{this.state.pos3.value.name}</div>
                                 <div>
                                     <img style={{maxHeight: '50px', maxWidth: '50px'}} src={this.state.pos3.value.image}></img>
                                 </div>
                             </div>
 
-                            <div style={{display: 'flex', margin: '1em'}}>
+                            <div className="playing-card">
                                 <div style={{fontSize: '50px'}}>{this.state.pos4.value.name}</div>
                                 <div>
                                     <img style={{maxHeight: '50px', maxWidth: '50px'}} src={this.state.pos4.value.image}></img>
                                 </div>
                             </div>
 
-                            <div style={{display: 'flex', margin: '1em'}}>
+                            <div className="playing-card">
                                 <div style={{fontSize: '50px'}}>{this.state.pos5.value.name}</div>
                                 <div>
                                     <img style={{maxHeight: '50px', maxWidth: '50px'}} src={this.state.pos5.value.image}></img>
