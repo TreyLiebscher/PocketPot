@@ -132,11 +132,22 @@ export function gameReducer(state = gameState, action) {
                 red:    redChips,
                 blue:   blueChips,
                 black:  blackChips
-            }
+            },
+            cards: state.players[playerPos].cards,
+            status: state.players[playerPos].status
+        }
+
+        const newPot = {
+            white: 0,
+            green: 0,
+            red: 0,
+            blue: 0,
+            black: 0
         }
 
         const changedState = {
-            players: originalPlayers
+            players: originalPlayers,
+            pot: newPot
         }
         const newState = {...state, ...changedState};
         return newState;
