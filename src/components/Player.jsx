@@ -1,10 +1,43 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
+import {addChips} from '../actions/gameActions';
 import Chip from './Chip';
 import './Player.css'
 
 import BetForm from './BetForm';
 
 export class Player extends React.Component {
+    constructor(props){
+        super(props);
+        this.showCardsUpdate = this.showCardsUpdate.bind(this);
+        this.awardChips = this.awardChips.bind(this);
+        this.state = {
+            showCards: false
+        }
+    }
+
+    showCardsUpdate(){
+        if(this.state.showCards === false){
+            this.setState({showCards: true})
+        } else {
+            this.setState({showCards: false})
+        }
+    }
+
+    awardChips(){
+        const pot = this.props.pot;
+
+        this.props.dispatch(addChips({
+            name: this.props.player.name,
+            chips: {
+                white: pot.white,
+                green: pot.green,
+                red: pot.red,
+                blue: pot.blue,
+                black: pot.black
+            } 
+        }))
+    }
 
     render(){
         const {status, betting, cards} = this.props.player;
@@ -21,18 +54,20 @@ export class Player extends React.Component {
         }
 
         const displayCards = () => {
-            if(cards.pos1.value !== null){
-                console.log('KIWI HELLO')
-                return <div>
-                    {/* <div>{cards.pos1.value.suit}</div> */}
-                    <div>{cards.pos1.value.name}</div>
-                    <div>
-                        <img style={{maxHeight: '50px', maxWidth: '50px'}} src={cards.pos1.value.image}></img>
+            if(cards.pos1.value !== null && this.state.showCards === true){
+                
+                return <div className="player-card-holder">
+                    <div className="playing-card">
+                        <div>{cards.pos1.value.name}</div>
+                        <div>
+                            <img style={{maxHeight: '50px', maxWidth: '50px'}} src={cards.pos1.value.image}></img>
+                        </div>                    
                     </div>
-                    {/* <div>{cards.pos2.value.suit}</div> */}
-                    <div>{cards.pos2.value.name}</div>
-                    <div>
-                        <img style={{maxHeight: '50px', maxWidth: '50px'}} src={cards.pos2.value.image}></img>
+                    <div className="playing-card">
+                        <div>{cards.pos2.value.name}</div>
+                        <div>
+                            <img style={{maxHeight: '50px', maxWidth: '50px'}} src={cards.pos2.value.image}></img>
+                        </div>                    
                     </div>
                 </div> 
 
@@ -64,6 +99,7 @@ export class Player extends React.Component {
         return (
             <li className="player-list-item">
                 <div className="player-name">{this.props.player.name}</div>
+                <button onClick={this.showCardsUpdate}>Show Cards</button>
                 {displayStatus()}
                 {totalChipValue()}
                 {displayCards()}
@@ -73,9 +109,14 @@ export class Player extends React.Component {
                 <Chip chipColor="blue" chipValue={this.props.chipValues.blue.value} chipQuantity={this.props.player.chips.blue}/>
                 <Chip chipColor="black" chipValue={this.props.chipValues.black.value} chipQuantity={this.props.player.chips.black}/>
                 <BetForm player={this.props.player}/>
+                <button onClick={this.awardChips}>Award Chips</button>
             </li>
         )
     }
 }
 
-export default Player;
+const mapStateToProps = state => ({
+    game: state.game
+})
+
+export default connect(mapStateToProps)(Player)
