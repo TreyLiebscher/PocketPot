@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import StatusBox from '../components/StatusBox';
 import Flop from '../components/Flop';
+import NavBar from '../components/NavBar';
 
 // Will hold all essential components during game
 
@@ -28,13 +29,13 @@ export class Table extends React.Component {
             return currency.format(total);
         }
         return (
-            <div>
-            <Link to="/">Home</Link>
-            <div>{displayTotalBet()}</div>
-            <StatusBox game={currentGame}/>
-            <Flop players={currentGame.players} />
+            <div className="container">
+                <NavBar />
+                <Link to="/">Home</Link>
+                <div>{displayTotalBet()}</div>
+                <StatusBox game={currentGame}/>
+                <Flop players={currentGame.players} />
             </div>
-
         )
     }
 }

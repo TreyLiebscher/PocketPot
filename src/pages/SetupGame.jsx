@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { addPlayer, chipValue, addChips, distChips, handOver, makeBet } from '../actions/gameActions';
 import PlayerForm from '../components/PlayerForm';
+import NavBar from '../components/NavBar';
 import store from '../store';
 import './SetupGame.css'
 import StatusBox from '../components/StatusBox';
@@ -47,6 +48,7 @@ class SetupGame extends Component {
         
         return (
             <div className="container">
+                <NavBar />
                 <div className="setup-game">New game setup...</div>
                 <Flop players={currentGame.players}/>
                 <PlayerForm />
