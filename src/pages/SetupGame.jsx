@@ -19,7 +19,6 @@ import Flop from '../components/Flop';
 // }))
 //
 
-
 class SetupGame extends Component {
     // retain for future use  
     // componentDidMount(){
@@ -51,19 +50,10 @@ class SetupGame extends Component {
                 <div className="setup-game">New game setup...</div>
                 <Flop players={currentGame.players}/>
                 <PlayerForm />
-                <button onClick={e => this.submitPlayers()}>Submit</button>
-                <button className="test-button" onClick={e => {this.props.dispatch(distChips())}}>Dist chips</button>
-                <button className="test-button" onClick={e => {this.props.dispatch(handOver())}}>Shift Roles</button>
-                <button className="test-button" onClick={e => {this.props.dispatch(makeBet({
-                    player: 'John',
-                    chips: {
-                        white: 10,
-                        green: 2,
-                        red: 0,
-                        blue: 0,
-                        black: 0
-                    }            
-                    }))}}>Test Bet</button>
+                <div className="button-holder">
+                    <button className="player-submit" onClick={e => this.submitPlayers()}>Submit</button>
+                </div>
+                {/* <button className="test-button" onClick={e => {this.props.dispatch(handOver())}}>Shift Roles</button> */}
                 <StatusBox game={currentGame} />
             </div>
         )
