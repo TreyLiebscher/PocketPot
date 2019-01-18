@@ -15,6 +15,16 @@
     flex-direction: column;
 }
 
+.button-holder {
+    text-align: center;
+}
+
+.player-submit {
+    width: 20%;
+    height: 50px;
+    margin: auto;
+}
+
 .chip-holder {
     display: flex;
 }
@@ -23,6 +33,11 @@
     height: 30px;
     width: 30px;
     border: 1px solid black;
+}
+
+.white {
+    background-color: white;
+    color: black;
 }
 
 .green {
