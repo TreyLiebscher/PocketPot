@@ -11,7 +11,6 @@ class SetChips extends React.Component {
         return (
             <div className="container">
                 <NavBar />
-                <StatusBox game={currentGame}/>
                 <h2>Set player's starting chip amount and values</h2>
                 <ChipValueForm />
             </div>
