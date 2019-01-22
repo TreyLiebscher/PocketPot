@@ -9,6 +9,8 @@ export class Flop extends React.Component {
     constructor(props) {
         super(props);
         this.showFlop = this.showFlop.bind(this);
+        this.showTurn = this.showTurn.bind(this);
+        this.showRiver = this.showRiver.bind(this);
         this.state = {
             cardsDealt: false,
             playerCards: null,
@@ -112,7 +114,47 @@ export class Flop extends React.Component {
         });
     }
 
+    showTurn(){
+        this.setState({pos4: {
+            value: this.state.pos4.value,
+            hidden: false
+        }})
+    }
+
+    showRiver(){
+        this.setState({pos5: {
+            value: this.state.pos5.value,
+            hidden: false
+        }})
+    }
+
     render() {
+
+        const turn = () => {
+            if(this.state.pos4.hidden === true){
+                return <div className="hidden-card"></div>
+            } else {
+                return <div className="playing-card">
+                            <div style={{fontSize: '50px'}}>{this.state.pos4.value.name}</div>
+                            <div>
+                                <img style={{maxHeight: '50px', maxWidth: '50px'}} src={this.state.pos4.value.image}></img>
+                            </div>
+                        </div>
+            }
+        }
+
+        const river = () => {
+            if(this.state.pos5.hidden === true){
+                return <div className="hidden-card"></div>
+            } else {
+                return <div className="playing-card">
+                            <div style={{fontSize: '50px'}}>{this.state.pos5.value.name}</div>
+                            <div>
+                                <img style={{maxHeight: '50px', maxWidth: '50px'}} src={this.state.pos5.value.image}></img>
+                            </div>
+                        </div>
+            }
+        }
 
         const flop = () => {
             if (this.state.cardsDealt === true) {
@@ -138,19 +180,22 @@ export class Flop extends React.Component {
                                 </div>
                             </div>
 
-                            <div className="playing-card">
+                            {/* <div className="playing-card">
                                 <div style={{fontSize: '50px'}}>{this.state.pos4.value.name}</div>
                                 <div>
                                     <img style={{maxHeight: '50px', maxWidth: '50px'}} src={this.state.pos4.value.image}></img>
                                 </div>
-                            </div>
-
+                            </div> */}
+                            {turn()}
+{/* 
                             <div className="playing-card">
                                 <div style={{fontSize: '50px'}}>{this.state.pos5.value.name}</div>
                                 <div>
                                     <img style={{maxHeight: '50px', maxWidth: '50px'}} src={this.state.pos5.value.image}></img>
                                 </div>
-                            </div>
+                            </div> */}
+
+                            {river()}
                         </div>
             }
         }
@@ -158,6 +203,8 @@ export class Flop extends React.Component {
         return (
             <div>
                 <button onClick={this.showFlop}>FLOP TEST</button>
+                <button onClick={this.showTurn}>Show turn</button>
+                <button onClick={this.showRiver}>Show river</button> 
                 {flop()}
             </div>
         )
