@@ -9,8 +9,9 @@ class PocketPot extends Component {
             <div className="container">
                 <div className="main-content">
                     <NavBar />
-                    <div>Welcome to pocketpot</div>
-                    <Link to="/new-game">New Game</Link>
+                    <div className="pocketPot-button-holder">
+                        <button className="pocketPot-button"><Link className="pocketPot-link" to="/new-game">New Game</Link></button>
+                    </div>
                 </div>            
             </div>
         )
