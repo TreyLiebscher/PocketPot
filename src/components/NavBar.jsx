@@ -13,7 +13,6 @@ class NavBar extends React.Component {
         return (
             <div className="nav-bar">
                 <h1>PocketPot</h1>
-                <Link to="/new-game">New Game</Link>
             </div>
         )
     }
