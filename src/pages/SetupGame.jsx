@@ -6,6 +6,7 @@ import PlayerForm from '../components/PlayerForm';
 import NavBar from '../components/NavBar';
 import './SetupGame.css'
 import StatusBox from '../components/StatusBox';
+import MiniPlayerBox from '../components/MiniPlayerBox';
 
 
 class SetupGame extends Component {
@@ -38,6 +39,7 @@ class SetupGame extends Component {
             <div className="container">
                 <NavBar />
                 <div className="setup-game">New game setup...</div>
+                <MiniPlayerBox players={currentGame.players}/>
                 <PlayerForm />
                 <div className="button-holder">
                     <button className="player-submit" onClick={e => this.submitPlayers()}>Submit</button>
