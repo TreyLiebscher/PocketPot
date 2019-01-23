@@ -1,0 +1,50 @@
+.chipValue-form {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    text-align: center;
+    align-items: center;
+}
+
+.chipValue-form .chip {
+    height: 50px;
+    width: 50px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    border-radius: 100px;
+}
+
+.chipValue-input {
+    background: white;
+    border: 2px solid black;
+    height: 20px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.chipValue-itemHolder {
+    display: flex;
+    justify-content: center;
+    margin: 0.5em;
+}
+
+.chipValue-input-holder {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+}
+
+.chipValue-button {
+    background: none;
+    border: 2px solid white;
+    color: white;
+    height: 40px;
+    width: 75px;
+    transition: all .3s ease;
+}
+
+.chipValue-button:hover {
+    background: black;
+    cursor: pointer;
+}
