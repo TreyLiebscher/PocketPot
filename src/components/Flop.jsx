@@ -84,6 +84,8 @@ export class Flop extends React.Component {
             const cardsArray = cards.flat();
             const playerCards = cardsArray.slice(5);
             this.props.dispatch(giveCards(playerCards));
+            // TODO: implement the commented out line below
+            // this.props.dispatch(setStartingPlayer())
             const testPlayers = playerCards.map((item) => {return {name: item.name, suit: item.suit}})
             console.log(testPlayers)
             this.setState({
@@ -179,22 +181,9 @@ export class Flop extends React.Component {
                                     <img style={{maxHeight: '50px', maxWidth: '50px'}} src={this.state.pos3.value.image}></img>
                                 </div>
                             </div>
-
-                            {/* <div className="playing-card">
-                                <div style={{fontSize: '50px'}}>{this.state.pos4.value.name}</div>
-                                <div>
-                                    <img style={{maxHeight: '50px', maxWidth: '50px'}} src={this.state.pos4.value.image}></img>
-                                </div>
-                            </div> */}
+                            
                             {turn()}
-{/* 
-                            <div className="playing-card">
-                                <div style={{fontSize: '50px'}}>{this.state.pos5.value.name}</div>
-                                <div>
-                                    <img style={{maxHeight: '50px', maxWidth: '50px'}} src={this.state.pos5.value.image}></img>
-                                </div>
-                            </div> */}
-
+                            
                             {river()}
                         </div>
             }
