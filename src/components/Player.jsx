@@ -99,9 +99,9 @@ export class Player extends React.Component {
         return (
             <li className="player-list-item">
                 <div className="player-name">{this.props.player.name}</div>
-                <button onClick={this.showCardsUpdate} className="player-button">Show Cards</button>
                 {displayStatus()}
                 {totalChipValue()}
+                <button onClick={this.showCardsUpdate} className="player-button">Show Cards</button>
                 {displayCards()}
                 <div className="player-chips-holder">
                     <Chip chipColor="white" chipValue={this.props.chipValues.white.value} chipQuantity={this.props.player.chips.white}/>

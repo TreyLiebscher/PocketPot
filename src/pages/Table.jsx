@@ -33,8 +33,8 @@ export class Table extends React.Component {
                 <NavBar />
                 <Link to="/">Home</Link>
                 <div>{displayTotalBet()}</div>
-                <StatusBox game={currentGame}/>
                 <Flop players={currentGame.players} />
+                <StatusBox game={currentGame}/>
             </div>
         )
     }

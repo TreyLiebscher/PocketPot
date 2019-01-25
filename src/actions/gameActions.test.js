@@ -8,7 +8,9 @@ import {
     DIST_CHIPS,
     distChips,
     GIVE_CARDS,
-    giveCards
+    giveCards,
+    HAND_OVER,
+    handOver
 } from './gameActions';
 
 import {
@@ -267,4 +269,33 @@ describe('giveCards', () => {
         expect(player4.cards.pos1.value).toEqual(7);
         expect(player4.cards.pos2.value).toEqual(8);
     });
-})
+});
+
+describe('handOver', () => {
+    it('Should return the action', () => {
+        const action = handOver();
+        expect(action.type).toEqual(HAND_OVER);
+    });
+
+    it('Should shift roles in order', () => {
+        let state = {
+            players: []
+        };
+
+        testPlayers.map((player) => {
+            state = gameReducer(state, addPlayer(player))
+        });
+
+        state = gameReducer(state, handOver());
+        
+        const player1 = state.players[0];
+        const player2 = state.players[1];
+        const player3 = state.players[2];
+        const player4 = state.players[3];
+
+        expect(player1.status).toEqual('player');
+        expect(player2.status).toEqual('dealer');
+        expect(player3.status).toEqual('smallBlind');
+        expect(player4.status).toEqual('bigBlind');
+    });
+});

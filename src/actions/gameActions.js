@@ -28,7 +28,7 @@ export const distChips = (chips) => ({
     type: DIST_CHIPS,
     chips
 });
-// TODO: Test
+// Tested
 export const HAND_OVER = 'HAND_OVER';
 export const handOver = () => ({
     type: HAND_OVER
