@@ -5,14 +5,18 @@ import {
     DIST_CHIPS,
     HAND_OVER,
     MAKE_BET,
-    GIVE_CARDS
+    GIVE_CARDS,
+    CHANGE_TURN
 } from '../src/actions/gameActions';
+import { stat } from 'fs';
 
 
 const gameState = {
     loading: false,
     error: null,
     players: [],
+    currentPlayer: null,
+    currentTurn: 0,
     chipValues: {
         white: {
             value: 0,
@@ -307,6 +311,32 @@ export function gameReducer(state = gameState, action) {
         const changedState = {
             players: updatedPlayers
         }
+        const newState = {...state, ...changedState};
+        return newState;
+    }
+
+    else if(action.type === CHANGE_TURN){
+        const originalPlayers = state.players.slice();
+        let changedState;
+        if(state.currentPlayer === null && state.currentTurn === 0){
+            changedState = {
+                currentPlayer: originalPlayers[0],
+                currentTurn: 1
+            }
+        } 
+        else if(state.currentTurn >= originalPlayers.length){
+            changedState = {
+                currentPlayer: null,
+                currentTurn: 0
+            }
+        }
+        else {
+            changedState = {
+                currentPlayer: originalPlayers[state.currentTurn],
+                currentTurn: state.currentTurn + 1
+            }
+        }
+
         const newState = {...state, ...changedState};
         return newState;
     }

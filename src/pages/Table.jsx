@@ -4,10 +4,20 @@ import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import StatusBox from '../components/StatusBox';
 import Flop from '../components/Flop';
 import NavBar from '../components/NavBar';
+import {changeTurn} from '../actions/gameActions';
 
 // Will hold all essential components during game
 
 export class Table extends React.Component {
+    constructor(props){
+        super(props);
+        this.testChangeTurn = this.testChangeTurn.bind(this);
+    }
+
+    testChangeTurn(){
+        this.props.dispatch(changeTurn())
+    }
+
 
     render(){
         const currentGame = this.props.game;
@@ -31,6 +41,7 @@ export class Table extends React.Component {
         return (
             <div className="container">
                 <NavBar />
+                <button onClick={this.testChangeTurn}>Test Turn</button>
                 <Link to="/">Home</Link>
                 <div>{displayTotalBet()}</div>
                 <Flop players={currentGame.players} />

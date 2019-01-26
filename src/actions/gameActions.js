@@ -39,3 +39,8 @@ export const makeBet = (bet) => ({
     type: MAKE_BET,
     bet
 });
+
+export const CHANGE_TURN = 'CHANGE_TURN';
+export const changeTurn = () => ({
+    type: CHANGE_TURN,
+});
