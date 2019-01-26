@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import StatusBox from '../components/StatusBox';
 import Flop from '../components/Flop';
 import NavBar from '../components/NavBar';
+import Player from '../components/Player';
 import {changeTurn} from '../actions/gameActions';
 
 // Will hold all essential components during game
@@ -23,6 +24,13 @@ export class Table extends React.Component {
         const currentGame = this.props.game;
         const chips = currentGame.chipValues;
         const pot = currentGame.pot;
+        const currentPlayer = currentGame.currentPlayer;
+
+        const displayCurrentPlayer = () => {
+            if(currentPlayer !== null){
+                return <Player player={currentPlayer} chipValues={chips} pot={pot} key={currentPlayer.name}/>
+            }
+        }
         
         const getTotal = (total, num) => {
             return total + num;
@@ -44,8 +52,9 @@ export class Table extends React.Component {
                 <button onClick={this.testChangeTurn}>Test Turn</button>
                 <Link to="/">Home</Link>
                 <div>{displayTotalBet()}</div>
+                <div>{displayCurrentPlayer()}</div>
                 <Flop players={currentGame.players} />
-                <StatusBox game={currentGame}/>
+                {/* <StatusBox game={currentGame}/> */}
             </div>
         )
     }

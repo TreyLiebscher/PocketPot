@@ -151,7 +151,8 @@ export function gameReducer(state = gameState, action) {
 
         const changedState = {
             players: originalPlayers,
-            pot: newPot
+            pot: newPot,
+            currentPlayer: originalPlayers[playerPos]
         }
         const newState = {...state, ...changedState};
         return newState;
@@ -278,7 +279,8 @@ export function gameReducer(state = gameState, action) {
 
         const changedState = {
             players: updatedPlayers,
-            pot: updatedPot
+            pot: updatedPot,
+            currentPlayer: updatedPlayers[playerPos]
         }
         const newState = {...state, ...changedState};
         return newState;
