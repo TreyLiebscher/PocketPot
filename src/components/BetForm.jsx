@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { makeBet } from '../actions/gameActions';
+import { makeBet, changeTurn } from '../actions/gameActions';
 import Chip from './Chip';
 class BetForm extends React.Component {
     constructor(props){
@@ -8,8 +8,10 @@ class BetForm extends React.Component {
         this.onSubmit = this.onSubmit.bind(this)
         this.showBetForm = this.showBetForm.bind(this);
         this.increaseBet = this.increaseBet.bind(this);
+        this.changeTurn = this.changeTurn.bind(this);
         this.state = {
             makeBet: false,
+            betSubmitted: false,
             white: 0,
             green: 0,
             red: 0,
@@ -38,6 +40,7 @@ class BetForm extends React.Component {
         this.props.dispatch(makeBet(bet))
         this.setState({
             makeBet: false,
+            betSubmitted: true,
             white: 0,
             green: 0,
             red: 0,
@@ -107,6 +110,10 @@ class BetForm extends React.Component {
         // this.setState({totalBet: total})
     }
 
+    changeTurn(){
+        this.props.dispatch(changeTurn());
+    }
+
     render(){
         const chips = this.props.game.chipValues;
 
@@ -139,14 +146,28 @@ class BetForm extends React.Component {
             }
         }
 
-        return (
-            <div>
+        const displayChangeTurnMessage = () => {
+            if(this.state.betSubmitted === true){
+                return <div>
+                    <div>Pass the phone to next player</div>
+                    <button onClick={this.changeTurn}>OK</button>
+                </div>
+            } else {
+                return <div>
                 <button onClick={this.showBetForm}>Bet</button>
                 <button>Call</button>
                 <button>Check</button>
                 <button>Fold</button>
                 {displayChipInterface()}
             </div>
+            }
+        }
+
+        return (
+            <div>
+            {displayChangeTurnMessage()}
+            </div>
+
         )
     }
 }
