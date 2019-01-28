@@ -46,7 +46,7 @@ export class PlayerForm extends React.Component {
                 <form className="player-form" onSubmit={this.onSubmit}>
                     <label htmlFor="player-input">Enter Player Name</label>
                     <input id="player-input" className="form-input" type="text" ref={input => this.textInput = input} />
-                    <button>Add Player</button>
+                    <button className="add-player-button">Add Player</button>
                 </form>
             </div>
         );
